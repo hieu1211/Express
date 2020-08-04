@@ -1,0 +1,9 @@
+extends ../layout/nav-bar
+
+block content
+	.container
+		h1 View User
+		p
+			b Name
+			if user
+				span= user.name

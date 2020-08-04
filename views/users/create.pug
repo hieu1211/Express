@@ -1,0 +1,30 @@
+extends ../layout/nav-bar
+block content
+	.container
+		h1 Create User
+		if errors
+			each error in errors
+				.alert.alert-danger=error
+
+		form(action="/users/create", method="POST")
+			.form-group
+				label(for="name") User name
+				input(type="text",class="form-control",id="name", name="name", value=value?value.name:"")
+
+			.form-group
+				label(for="phone") Phone number
+				input(type="text",class="form-control",id="phone", name="phone", value=value?value.phone:"")
+
+			.form-group
+				label(for="email") Email
+				input(type="text",class="form-control",id="email", name="email", value=value?value.email:"")
+
+			.form-group
+				label(for="password") Password
+				input(type="password",class="form-control",id="password", name="password", value=value?value.password:"")
+
+			.form-group
+				label(for="repassword") Repeat password
+				input(type="Password",class="form-control",id="repassword", name="repassword", value=value?value.repassword:"")
+						
+			button.btn.btn-primary Create

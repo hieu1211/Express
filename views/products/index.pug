@@ -1,0 +1,10 @@
+extends ../layout/nav-bar
+
+block content
+	.container
+		h1 Products
+		.d-flex.flex-row-reverse
+			form.d-flex(action="/products",method="GET")
+				input.form-control(type="text",name="q",value=q)
+				button.btn.btn-primary Search
+				

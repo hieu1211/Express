@@ -1,0 +1,21 @@
+extends ../layout/nav-bar
+
+block content
+	.container
+		h1 User List
+		.d-flex
+			form.d-flex(action="/users/search",method="GET")
+				input.form-control(type="text",name="q",value=q)
+				button.btn.btn-primary Search
+
+		table.table
+			tr
+				th Name
+				th Phone
+				th Link
+			each user in users
+				tr
+					td= user.name
+					td= user.phone
+					td
+						a(href="/users/" + user.id) View
