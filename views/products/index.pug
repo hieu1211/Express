@@ -1,5 +1,5 @@
 extends ../layout/nav-bar
-
+include ./product-component
 block content
 	.container
 		h1 Products
@@ -7,4 +7,23 @@ block content
 			form.d-flex(action="/products",method="GET")
 				input.form-control(type="text",name="q",value=q)
 				button.btn.btn-primary Search
-				
+		.list-4-products.d-flex.flex-row.mw-100.justify-content-between.mb-5
+			each product,index in value
+				if index<4
+					+product(product.link,product.name,product.desc)
+		.list-4-products.d-flex.flex-row.mw-100.justify-content-between.mb-5
+			each product,index in value
+				if index>3
+					+product(product.link,product.name,product.desc)
+		nav(aria-label='Page navigation example')
+			ul.pagination
+				li(class=page===1?'page-item disabled':'page-item')
+					a.page-link(href='./products?page='+(page-1)) Previous
+				li(class=page===1?'page-item d-none':'page-item')
+					a.page-link.d-none(href='./products?page='+(page-1))=page-1
+				li.page-item
+					a.active.page-link(href='./products?page='+page)=page
+				li(class=page===sumPage?'page-item d-none':'page-item')
+					a.page-link(href='./products?page='+(page+1))=page+1
+				li(class=page===sumPage?'page-item disabled':'page-item' )
+					a.page-link(href='./products?page='+(page+1)) Next

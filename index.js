@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(cookieParser(process.env.COOKIES_KEY));
 
 app.set('view engine','pug');
-app.set('views', './views')
+app.set('views', './views');
 
 app.use(express.static('css'));
 app.use('/users',requireLogin.requireLogin, usersRouter);
