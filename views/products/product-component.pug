@@ -1,8 +1,8 @@
-mixin product(img,name,desc)
+mixin product(img,name,desc,id)
 	.product.d-flex.flex-column.border.border-secondary
 		.img-product
 			img(src=img)
 		.content-product.p-2.d-flex.flex-column.flex-grow-1
 			h5=name
 			p.flex-grow-1=desc
-			button.btn.btn-primary Add to cart
+			a.btn.btn-primary(href='./cart/add/'+id+'page'+page) Add to cart

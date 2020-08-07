@@ -5,7 +5,6 @@ module.exports.requireLogin = (req,res,next)=>{
 		return;
 	}
 	var user = db.get('users').find({id: req.signedCookies.userid}).value();
-	console.log(req.cookies, req.signedCookies);
 	if(!user){
 		res.redirect("/auth/login");
 		return;

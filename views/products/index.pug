@@ -7,23 +7,46 @@ block content
 			form.d-flex(action="/products",method="GET")
 				input.form-control(type="text",name="q",value=q)
 				button.btn.btn-primary Search
-		.list-4-products.d-flex.flex-row.mw-100.justify-content-between.mb-5
+		.list-4-products.d-flex.flex-row.mw-100.justify-content-around.mb-5
 			each product,index in value
 				if index<4
-					+product(product.link,product.name,product.desc)
-		.list-4-products.d-flex.flex-row.mw-100.justify-content-between.mb-5
+					+product(product.link,product.name,product.desc,product.id)
+		.list-4-products.d-flex.flex-row.mw-100.justify-content-around.mb-5
 			each product,index in value
 				if index>3
-					+product(product.link,product.name,product.desc)
+					+product(product.link,product.name,product.desc,product.id)
 		nav(aria-label='Page navigation example')
-			ul.pagination
-				li(class=page===1?'page-item disabled':'page-item')
-					a.page-link(href='./products?page='+(page-1)) Previous
-				li(class=page===1?'page-item d-none':'page-item')
-					a.page-link.d-none(href='./products?page='+(page-1))=page-1
-				li.page-item
-					a.active.page-link(href='./products?page='+page)=page
-				li(class=page===sumPage?'page-item d-none':'page-item')
-					a.page-link(href='./products?page='+(page+1))=page+1
-				li(class=page===sumPage?'page-item disabled':'page-item' )
-					a.page-link(href='./products?page='+(page+1)) Next
+			ul.pagination.justify-content-end
+				if page===1
+					li.page-item.disabled
+						a.page-link(href='./products?page='+(page-1)) Previous
+					li.page-item.active
+						a.page-link(href='./products?page='+page)=page
+					li.page-item
+						a.page-link(href='./products?page='+(page+1))=page+1
+					li.page-item
+						a.page-link(href='./products?page='+(page+2))=page+2
+					li.page-item
+						a.page-link(href='./products?page='+(page+1)) Next
+				else if page===sumPage
+					li.page-item
+						a.page-link(href='./products?page='+(page-1)) Previous
+					li.page-item
+						a.page-link(href='./products?page='+(sumPage-2))=sumPage-2
+					li.page-item
+						a.page-link(href='./products?page='+(sumPage-1))=sumPage-1
+					li.page-item.active
+						a.page-link(href='./products?page='+sumPage)=sumPage
+					li.page-item.disabled
+						a.page-link(href='./products?page='+(page+1)) Next
+				else
+					li.page-item
+						a.page-link(href='./products?page='+(page-1)) Previous
+					li.page-item
+						a.page-link(href='./products?page='+(page-1))=page-1
+					li.page-item.active
+						a.page-link(href='./products?page='+(page))=page
+					li.page-item
+						a.page-link(href='./products?page='+(page+1))=page+1
+					li(class=page===sumPage?'page-item disabled':'page-item' )
+						a.page-link(href='./products?page='+(page+1)) Next

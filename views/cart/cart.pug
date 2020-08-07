@@ -1,0 +1,13 @@
+extends ../layout/nav-bar
+block content
+	.container
+		table.table
+			tr
+				th Sản Phẩm
+				th Số lượng
+			each product in cart
+				tr
+					td.d-flex.align-items-center
+						img(src=product.link, width="64")
+						.font-weight-bold.ml-2=product.name
+					td="SL: "+product.count

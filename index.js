@@ -6,11 +6,13 @@ var cookieParser = require('cookie-parser');
 var usersRouter = require('./routes/users.route.js');
 var authRouter = require('./routes/auth.route.js');
 var productsRouter = require('./routes/products.route.js');
+var cartRouter = require('./routes/cart.route.js');
 var requireLogin = require('./middleware/requireLogin.js');
-
+var sessionmiddleware = require('./middleware/session.middleware.js');
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.COOKIES_KEY));
+app.use(sessionmiddleware);
 
 app.set('view engine','pug');
 app.set('views', './views');
@@ -22,6 +24,7 @@ app.use('/index', (req, res)=>{
 })
 app.use('/auth', authRouter);
 app.use('/products', productsRouter);
+app.use('/cart',cartRouter);
 app.listen(3000,()=>{
 	console.log("ok port 3000");
 })
