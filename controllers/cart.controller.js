@@ -17,15 +17,18 @@ module.exports.addToCart = (req,res,next)=>{
 module.exports.get = (req, res)=>{
 	var cart = [];
 	var sessionId = req.signedCookies.sessionid;
-	var session = db.get('session').find({id: sessionId}).value();
-	var index=0;
-	for(var productid in session.cart){
-		var product = db.get('products').find({id: productid}).value();
-		cart.push(product);
-		cart[index].count = session.cart[productid];
-		index++;
+	if(sessionId){
+		var session = db.get('session').find({id: sessionId}).value();
+		var index=0;
+		for(var productid in session.cart){
+			var product = db.get('products').find({id: productid}).value();
+			cart.push(product);
+			cart[index].count = session.cart[productid];
+			index++;
+		}
+		res.render('./cart/cart',{
+			cart:cart
+		})
 	}
-	res.render('./cart/cart',{
-		cart:cart
-	})
+	res.redirect('./cart');
 }
